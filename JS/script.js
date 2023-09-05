@@ -5,6 +5,7 @@ let minhaListaDeTarefa = [];
 
 function addTarefa(){
     minhaListaDeTarefa.push(inputTarefa.value)
+    inputTarefa.value = ''
     exibirTarefas()
 }
 
