@@ -9,3 +9,12 @@
 #icon-fechar{
   width: 25px;
 }
+
+#icon-concluida{
+  width: 20px;
+}
+
+.done{
+  text-decoration: line-through;
+  font-weight: bold;
+}

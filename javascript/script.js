@@ -4,21 +4,28 @@ const listaDeTarefas = document.querySelector('#listartarefas')
 let minhaListaDeTarefa = [];
 
 function addTarefa(){
-    minhaListaDeTarefa.push(inputTarefa.value)
-    inputTarefa.value = ''
-    exibirTarefas()
+    if(inputTarefa.value == ""){
+        alert("Adcione uma nova tarefa")
+    }else{
+        minhaListaDeTarefa.push({
+            tarefa: inputTarefa.value,
+            concluida: false
+        })
+        inputTarefa.value = ''
+        exibirTarefas()
+    }
 }
 
 function exibirTarefas() {
     let novaLi = ''
     minhaListaDeTarefa.forEach((intem, posicao) =>{
         novaLi = novaLi + `
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="list-group-item d-flex justify-content-between align-items-center ${intem.concluida && "done"}">
                     <div class="d-flex align-items-center">
-                        <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." />
-                        ${intem}
+                        <img class="me-3" src="img/concluida.png" id="icon-concluida" onclick="tarefaConcluida(${posicao})">
+                        ${intem.tarefa}
                     </div>
-                    <img src="img/fechar.png" id="icon-fechar" onclick="removerTarefa(${posicao})">   
+                        <img src="img/fechar.png" id="icon-fechar" onclick="removerTarefa(${posicao})">   
                 </li>
             `
     })
@@ -30,3 +37,7 @@ function removerTarefa(posicao){
     exibirTarefas()
 }
 
+function tarefaConcluida(posicao){
+    minhaListaDeTarefa[posicao].concluida = !minhaListaDeTarefa[posicao].concluida
+    exibirTarefas()
+}
