@@ -1,17 +1,20 @@
 const inputTarefa = document.querySelector('#inputTarefa')
 const listaDeTarefas = document.querySelector('#listartarefas')
+const listavazia = document.querySelector('.listavazia')
 
 let minhaListaDeTarefa = [];
 
 function addTarefa(){
     if(inputTarefa.value == ""){
-        alert("Adcione uma nova tarefa")
+        alert("Digite uma nova tarefa!")
     }else{
         minhaListaDeTarefa.push({
             tarefa: inputTarefa.value,
             concluida: false
         })
         inputTarefa.value = ''
+        inputTarefa.focus()
+        document.getElementById('listavazia').style.display = 'none'
         exibirTarefas()
     }
 }
@@ -34,6 +37,9 @@ function exibirTarefas() {
 
 function removerTarefa(posicao){
     minhaListaDeTarefa.splice(posicao, 1)
+    if(minhaListaDeTarefa.length == 0){
+        document.getElementById('listavazia').style.display = '';
+    }
     exibirTarefas()
 }
 
@@ -41,3 +47,9 @@ function tarefaConcluida(posicao){
     minhaListaDeTarefa[posicao].concluida = !minhaListaDeTarefa[posicao].concluida
     exibirTarefas()
 }
+
+inputTarefa.addEventListener('keydown', function(e) {
+    if(e.keyCode == 13){
+        addTarefa()
+    }
+})
